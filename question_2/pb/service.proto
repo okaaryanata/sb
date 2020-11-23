@@ -1,0 +1,28 @@
+syntax="proto3";
+
+package pb;
+
+message request {
+  string pagination = 1 [json_name="pagination"];
+  string search_word = 2 [json_name="search_word"];
+}
+
+message response {
+  bool is_success = 1 [json_name="is_success"];
+  string error_message = 2 [json_name="message"];
+  string totalResults = 3 [json_name="totalResults"];
+  string Response = 4 [json_name="Response"];
+
+  message MOVIE {
+    string Title = 1 [json_name="Title"];
+    string Year = 2 [json_name="Year"];
+    string imdbID = 3 [json_name="imdbID"];
+    string Type = 4 [json_name="Type"];
+    string Poster = 5 [json_name="Poster"];
+  }
+  repeated MOVIE Search = 5 [json_name="Search"];
+}
+
+service MovieService {
+  rpc GetMovie (request) returns (response) {};
+}
